@@ -6,7 +6,7 @@ const getAllContacts = async (req, res) => {
   const { _id: owner } = req.user;
   const { page = 1, limit = 20, favorite } = req.query;
   const favoriteQuery = favorite ? { favorite } : {};
-  const query = { ...owner, ...favoriteQuery };
+  const query = { owner, ...favoriteQuery };
   const skip = (page - 1) * limit;
   const allContacts = await Contact.find(query, "", {
     skip,
