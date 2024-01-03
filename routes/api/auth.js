@@ -2,7 +2,12 @@ const express = require("express");
 
 const ctrl = require("../../controllers/auth");
 
-const { validateBody, authenticate, upload } = require("../../midlwares");
+const {
+  validateBody,
+  authenticate,
+  upload,
+  resizeAvatar,
+} = require("../../midlwares");
 
 const { schemas } = require("../../models/user");
 
@@ -22,6 +27,7 @@ router.patch(
   "/avatars",
   authenticate,
   upload.single("avatar"),
+  resizeAvatar,
   ctrl.updateAvatar
 );
 
