@@ -3,7 +3,6 @@ const isValidId = require("./isValidId");
 const isEmptyReqBody = require("./isEmptyReqBody");
 const authenticate = require("./authenticate");
 const upload = require("./upload");
-const resizeAvatar = require("./resizeAvatar");
 
 module.exports = {
   validateBody,
@@ -11,5 +10,4 @@ module.exports = {
   isEmptyReqBody,
   authenticate,
   upload,
-  resizeAvatar,
 };

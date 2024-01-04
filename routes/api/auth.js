@@ -27,7 +27,7 @@ router.patch(
   "/avatars",
   authenticate,
   upload.single("avatar"),
-  resizeAvatar,
+  // resizeAvatar,
   ctrl.updateAvatar
 );
 
