@@ -50,6 +50,4 @@ const verifyEmailMessage = (email, verificationToken) => {
   };
 };
 
-module.exports = {
-  verifyEmailMessage,
-};
+module.exports = { verifyEmailMessage };
