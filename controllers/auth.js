@@ -1,4 +1,9 @@
-const { HttpError, ctrlWrapper, sendEmail } = require("./../helpers");
+const {
+  HttpError,
+  ctrlWrapper,
+  sendEmail,
+  verifyEmailMessage,
+} = require("./../helpers");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -10,7 +15,7 @@ const { nanoid } = require("nanoid");
 
 const { User } = require("../models/user");
 
-const { SECRET_KEY, BASE_URL } = process.env;
+const { SECRET_KEY, FRONT_END } = process.env;
 
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
@@ -33,13 +38,13 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your e-mail</a>`,
-  };
+  // const verifyEmail = {
+  //   to: email,
+  //   subject: "Verify email",
+  //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your e-mail</a>`,
+  // };
 
-  await sendEmail(verifyEmail);
+  await sendEmail(verifyEmailMessage(email, verificationToken));
 
   res.status(201).json({
     user: { email: newUser.email, subscription: newUser.subscription },
@@ -59,7 +64,9 @@ const verifyEmail = async (req, res) => {
     verificationToken: null,
   });
 
-  res.status(200).json({ message: "Verification successful" });
+  res.redirect(`${FRONT_END}/login`);
+  // .status(200)
+  // .json({ message: "Verification successful" })
 };
 
 const resendVerifyEmail = async (req, res) => {
@@ -73,13 +80,13 @@ const resendVerifyEmail = async (req, res) => {
 
   if (user.verify) throw HttpError(400, "Verification has already been passed");
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${user.verificationToken}">Click to verify your e-mail</a>`,
-  };
-
-  await sendEmail(verifyEmail);
+  // const verifyEmail = {
+  //   to: email,
+  //   subject: "Verify email",
+  //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${user.verificationToken}">Click to verify your e-mail</a>`,
+  // };
+  const verifyToken = user.verificationToken;
+  await sendEmail(verifyEmailMessage(email, verifyToken));
 
   res.status(200).json({ message: "Verification email sent" });
 };
