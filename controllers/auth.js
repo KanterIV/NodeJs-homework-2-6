@@ -15,7 +15,7 @@ const { nanoid } = require("nanoid");
 
 const { User } = require("../models/user");
 
-const { SECRET_KEY, FRONT_END, BASE_URL } = process.env;
+const { SECRET_KEY, FRONTEND_URL, BASE_URL } = process.env;
 
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
@@ -38,14 +38,26 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  const verifyEmail = {
-    to: email,
-    subject: "Verify email",
-    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your e-mail</a>`,
-  };
-  await sendEmail(verifyEmail);
+  sendEmail({
+    to: "recipient@example.com",
+    subject: "Test Email",
+    text: "This is a test email sent via Mailjet.",
+  })
+    .then(() => {
+      console.log("Test email sent successfully!");
+    })
+    .catch((error) => {
+      console.error("Error sending test email:", error);
+    });
 
-  // await sendEmail(verifyEmailMessage(email, verificationToken));
+  // const verifyEmail = {
+  //   to: email,
+  //   subject: "Verify email",
+  //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your e-mail</a>`,
+  // };
+  // await sendEmail(verifyEmail);
+
+  await sendEmail(verifyEmailMessage(email, verificationToken));
 
   res.status(201).json({
     user: { email: newUser.email, subscription: newUser.subscription },
@@ -65,7 +77,7 @@ const verifyEmail = async (req, res) => {
     verificationToken: null,
   });
 
-  res.redirect(`${FRONT_END}/login`);
+  res.redirect(`${FRONTEND_URL}/login`);
   // .status(200)
   // .json({ message: "Verification successful" })
 };
