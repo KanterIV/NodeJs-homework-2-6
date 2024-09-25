@@ -1,19 +1,19 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const { META_PASSWORD } = process.env;
+const { MAILJET_USER, MAILJET_PASSWORD } = process.env;
 
 const nodemailreConfig = {
-  host: "smtp.meta.ua",
+  host: "in-v3.mailjet.com",
   port: 465,
   secure: true,
-  auth: { user: "kanterigor@meta.ua", pass: META_PASSWORD },
+  auth: { user: MAILJET_USER, pass: MAILJET_PASSWORD },
 };
 
 const transport = nodemailer.createTransport(nodemailreConfig);
 
 const sendEmail = async (data) => {
-  const email = { ...data, from: "kanterigor@meta.ua" };
+  const email = { ...data, from: '"ContactsHub" <kanterigor@gmail.com>' };
   await transport
     .sendMail(email)
     .then(() => {
