@@ -15,7 +15,7 @@ const { nanoid } = require("nanoid");
 
 const { User } = require("../models/user");
 
-const { SECRET_KEY, FRONTEND_URL, BASE_URL } = process.env;
+const { SECRET_KEY, FRONTEND_URL } = process.env;
 
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
@@ -38,24 +38,11 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  sendEmail({
-    to: "recipient@example.com",
-    subject: "Test Email",
-    text: "This is a test email sent via Mailjet.",
-  })
-    .then(() => {
-      console.log("Test email sent successfully!");
-    })
-    .catch((error) => {
-      console.error("Error sending test email:", error);
-    });
-
   // const verifyEmail = {
   //   to: email,
   //   subject: "Verify email",
   //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your e-mail</a>`,
   // };
-  // await sendEmail(verifyEmail);
 
   await sendEmail(verifyEmailMessage(email, verificationToken));
 
@@ -98,6 +85,7 @@ const resendVerifyEmail = async (req, res) => {
   //   subject: "Verify email",
   //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${user.verificationToken}">Click to verify your e-mail</a>`,
   // };
+
   const verifyToken = user.verificationToken;
   await sendEmail(verifyEmailMessage(email, verifyToken));
 
