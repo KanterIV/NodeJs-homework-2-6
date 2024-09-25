@@ -15,7 +15,7 @@ const { nanoid } = require("nanoid");
 
 const { User } = require("../models/user");
 
-const { SECRET_KEY, FRONT_END } = process.env;
+const { SECRET_KEY, FRONT_END, BASE_URL } = process.env;
 
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
