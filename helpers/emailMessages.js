@@ -42,7 +42,6 @@ const verifyEmailMessage = (email, verificationToken) => {
             padding: 15px 30px;
             background-color: #6f42c1;
             background-image: linear-gradient(to right, #6f42c1, #9b59b6);
-            color: #ffffff;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
@@ -74,7 +73,7 @@ const verifyEmailMessage = (email, verificationToken) => {
     <div class="container">
         <h2>Email Confirmation</h2>
         <p>Thank you for registering! Please click the button below to confirm your email address:</p>
-        <a class="button" target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">Confirm Your Email</a>
+        <a class="button" target="_blank" href="${BASE_URL}/users/verify/${verificationToken}" style="color: #ffffff;">Confirm Your Email</a>
         
         <div class="divider"></div>
         
