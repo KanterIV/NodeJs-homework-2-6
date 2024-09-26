@@ -13,7 +13,7 @@ const nodemailreConfig = {
 const transport = nodemailer.createTransport(nodemailreConfig);
 
 const sendEmail = async (data) => {
-  const email = { ...data, from: "kanterigor@meta.ua" };
+  const email = { ...data, from: "ContactsHub <kanterigor@meta.ua>" };
   await transport
     .sendMail(email)
     .then(() => {
