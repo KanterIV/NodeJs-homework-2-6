@@ -38,12 +38,6 @@ const register = async (req, res) => {
     verificationToken,
   });
 
-  // const verifyEmail = {
-  //   to: email,
-  //   subject: "Verify email",
-  //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to verify your e-mail</a>`,
-  // };
-
   await sendEmail(verifyEmailMessage(email, verificationToken));
 
   res.status(201).json({
@@ -65,8 +59,6 @@ const verifyEmail = async (req, res) => {
   });
 
   res.redirect(`${FRONTEND_URL}/login`);
-  // .status(200)
-  // .json({ message: "Verification successful" })
 };
 
 const resendVerifyEmail = async (req, res) => {
@@ -79,12 +71,6 @@ const resendVerifyEmail = async (req, res) => {
   }
 
   if (user.verify) throw HttpError(400, "Verification has already been passed");
-
-  // const verifyEmail = {
-  //   to: email,
-  //   subject: "Verify email",
-  //   html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${user.verificationToken}">Click to verify your e-mail</a>`,
-  // };
 
   const verifyToken = user.verificationToken;
   await sendEmail(verifyEmailMessage(email, verifyToken));
