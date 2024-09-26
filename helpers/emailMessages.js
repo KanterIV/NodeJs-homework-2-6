@@ -10,9 +10,10 @@ const verifyEmailMessage = (email, verificationToken) => {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             text-align: center;
@@ -28,6 +29,8 @@ const verifyEmailMessage = (email, verificationToken) => {
         }
         h2 {
             color: #6f42c1;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         p {
             color: #555;
@@ -38,10 +41,13 @@ const verifyEmailMessage = (email, verificationToken) => {
             margin-top: 20px;
             padding: 15px 30px;
             background-color: #6f42c1;
-            color: #fff;
+            background-image: linear-gradient(to right, #6f42c1, #9b59b6);
+            color: #ffffff;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            border: none;
+            cursor: pointer;
         }
         .footer {
             margin-top: 30px;
@@ -57,6 +63,11 @@ const verifyEmailMessage = (email, verificationToken) => {
         .social-links a:hover {
             text-decoration: underline;
         }
+        .divider {
+            height: 1px;
+            background-color: #ccc;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -64,6 +75,8 @@ const verifyEmailMessage = (email, verificationToken) => {
         <h2>Email Confirmation</h2>
         <p>Thank you for registering! Please click the button below to confirm your email address:</p>
         <a class="button" target="_blank" href="${BASE_URL}/users/verify/${verificationToken}">Confirm Your Email</a>
+        
+        <div class="divider"></div>
         
         <div class="footer">
             <p>Thank you for joining us!</p>
@@ -78,7 +91,7 @@ const verifyEmailMessage = (email, verificationToken) => {
     </div>
 </body>
 </html>
-    
+
    `,
   };
 };
