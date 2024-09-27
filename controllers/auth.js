@@ -113,7 +113,7 @@ const login = async (req, res) => {
     user: {
       email: user.email,
       name: user.name,
-      avatar: user.avatarURL,
+      avatarURL: user.avatarURL,
       subscription: user.subscription,
     },
   });
@@ -122,7 +122,12 @@ const login = async (req, res) => {
 const getCurrent = async (req, res) => {
   const { email, name, avatarURL, subscription } = await req.user;
 
-  res.json({ email, name, avatarURL, subscription });
+  res.json({
+    email,
+    name,
+    avatarURL,
+    subscription,
+  });
 };
 
 const logout = async (req, res) => {
