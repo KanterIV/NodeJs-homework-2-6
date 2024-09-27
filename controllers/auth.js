@@ -120,9 +120,9 @@ const login = async (req, res) => {
 };
 
 const getCurrent = async (req, res) => {
-  const { email, subscription } = await req.user;
+  const { email, name, avatar, subscription } = await req.user;
 
-  res.json({ email, subscription });
+  res.json({ email, name, avatar, subscription });
 };
 
 const logout = async (req, res) => {
